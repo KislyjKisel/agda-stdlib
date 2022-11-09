@@ -43,6 +43,10 @@ module _ {a b ℓ} {A : Set a} {B : Set b} {R : REL A B ℓ} where
   just-inv : ∀ {x y} → Pointwise R (just x) y → ∃ λ z → y ≡ just z × R x z
   just-inv (just r) = -, P.refl , r
 
+[R⇒≡]⇒≡ : ∀{a ℓ} {A : Set a} {R : Rel A ℓ} {x y : Maybe A} → (∀{x y} → R x y → x ≡ y) → Pointwise R x y → x ≡ y
+[R⇒≡]⇒≡ R⇒≡ (just r) = P.cong just (R⇒≡ r)
+[R⇒≡]⇒≡ R⇒≡ nothing  = P.refl
+
 ------------------------------------------------------------------------
 -- Relational properties
 
